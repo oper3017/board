@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% load staticfiles %}
+{% block content %}
+<h1>로그아웃</h1>
+<p>좋은 하루 되세요.</p>
+<p>
+    <a href="{% url 'login' %}">다시 로그인하러 가기</a>
+</p>
+{% endblock %}

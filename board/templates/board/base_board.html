@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BOARD</title>
+    {% load staticfiles %}
+</head>
+<body>
+    <h1>BOARD WORLD</h1>
+    {% block content %}
+    <h1>게시판</h1>
+    {% block content_board %}{% endblock content_board %}
+    {% endblock content %}
+</body>
+</html>
