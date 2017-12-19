@@ -1,9 +1,14 @@
-{% extends "base.html" %} 
-{% block title %}{% endblock %}
+{% extends "base.html" %}
+{% block title %}홈{% endblock %}
 {% load staticfiles %}
-<!-- {% block extra_style %}{% static "css/home.css" %}{% endblock %} -->
+<!-- {% block sub_style %}<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}  -->
+{% block extra_style %}{% static "css/home.css" %}{% endblock %}
 {% block content %}
-<div>
-    홈페이지
-</div>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>TEST MODULE</h1>
+            <p>메인 테스트용 화면</p>
+        </div>
+        <p>사진용</p>
+    </div>
 {% endblock %}

@@ -1,23 +1,25 @@
 {% extends 'board/base_board.html' %}
-{% block content %}
-
-<table>
-    <tr>
-        <td>순번</td>
-        <td>제목</td>
-        <td>작성자</td>
-        <td>내용</td>
-        <td>일자</td>
-    </tr>
-{% for post in posts %}
-    <tr>
-        <td>{{ post.id }}</td>
-        <td><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></td>
-        <td>{{ post.author }}</td>
-        <td>{{ post.text|linebreaksbr }}</td>
-        <td>{{ post.created_date|date:"M/d"|lower }}</td>
-    </tr>
-{% endfor %}
-</table>
-
+{% block content_board %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <tr style="background-color : lightblue">
+                <td>순번</td>
+                <td>제목</td>
+                <td>작성자</td>
+                <td>내용</td>
+                <td>일자</td>
+            </tr>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td><a href="{% url 'board:post_detail' pk=post.pk %}">{{ post.title }}</a></td>
+                <td>{{ post.author }}</td>
+                <td>{{ post.text|linebreaksbr }}</td>
+                <td>{{ post.created_date|date:"M/d"|lower }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        
+    </div>
+    
 {% endblock %}

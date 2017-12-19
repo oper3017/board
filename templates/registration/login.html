@@ -3,15 +3,29 @@
 {% load staticfiles %}
 {% block content %}
 <h1>로그인</h1>
-<form action="." method="post">{% csrf_token %} {% if form.errors %}
-    <p>아래 입력내용을 다시 확인하세요.</p>
-    {% endif %}
-    <p>아이디와 비밀번호를 입력하세요.</p>
-    <fieldset>
-        {{ form.username.label_tag }} {{ form.username }}
-        <br>{{ form.password.label_tag }} {{ form.password }}
-    </fieldset>
-    <input type="submit" value="로그인" />
-    <input type="hidden" name="next" value="{{ next }}" />
+<form action="." method="post">
+    <div class="form-group">{% csrf_token %} 
+        {% block alert%}
+        {% if form.errors %}
+        <div class="alert alert-warning">아래 입력내용을 다시 확인하세요.</div>
+        {% endif %}
+        {% endblock%}
+        <p>아이디와 비밀번호를 입력하세요.</p>
+        <div class="form-group">
+            {{ form.username.label_tag }} {{ form.username }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label_tag }} {{ form.password }}
+        </div>
+        <button type="submit" value="로그인" class="btn btn-default">LOGIN<button>
+    </div>
 </form>
+<script>
+    (function (){
+        var elem = document.querySelectorAll('input');
+        for (var i = 1; i < elem.length; i++){
+            elem[i].classList.add('form-control');
+        }
+    })();
+</script>
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% load staticfiles %}
+{% block content %}
+<h1>회원가입완료</h1>
+<div class="alert-success">환영합니다!</div>
+<p>
+    <a href="{% url 'login' %}">로그인하기</a>
+</p>
+{% endblock %}
