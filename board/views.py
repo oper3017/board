@@ -20,8 +20,11 @@ def post_detail(request, pk):
 
 def post_new(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
+            upload = Upload()
+            upload.pic = form.cleaned_data['pic']
+            upload.save()
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
