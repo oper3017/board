@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 from django.utils import timezone
 
 
@@ -21,4 +22,11 @@ class Post(models.Model):
     def approved_comments(self):
         return self.comments.filter(approved_comment=True)
 
-    
+class Upload(models.Model):
+    pic = models.FileField(upload_to="images/")    
+    upload_date=models.DateTimeField(auto_now_add =True)
+
+class UploadForm(ModelForm):
+    class Meta:
+        model = Upload
+        fields = ('pic',)

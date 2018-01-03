@@ -1,6 +1,7 @@
 from django import forms
 from .models import Post
 
+
 class PostForm(forms.ModelForm):
 
     class Meta:
@@ -17,5 +18,8 @@ class BoardSearchForm(forms.Form):
     search_word = forms.CharField(label='검색')
     search_filter= forms.CharField(widget=forms.Select(choices=CHOICES))
 
-
-    
+class DocumentForm(forms.Form):
+    docfile = forms.FileField(
+        label='Select a file',
+        help_text='max. 42 megabytes'
+    )

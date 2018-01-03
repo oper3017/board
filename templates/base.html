@@ -44,6 +44,9 @@
                         <li>
                             <a href="{% url 'board:index' %}">게시판</a>
                         </li>
+                        <li>
+                            <a href="{% url 'board:index' %}">갤러리</a>
+                        </li>
                     </ul>
             </div>
         </nav>
@@ -52,6 +55,9 @@
         <br><br>
         {% block footer %}
         <div>&copy; 2017. (이름) All rights reserved.</div>{% endblock %}
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+            <script src="{% static 'js/app.js' %}"></script>
+            {% block javascript %}{% endblock %}
     </div>
 </body>
 

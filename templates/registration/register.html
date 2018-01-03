@@ -7,14 +7,11 @@
         {% csrf_token %} {% if form.errors %}
         <div class="alert-warning">아래 입력내용을 다시 확인하세요.</div>
         {% endif %}
+        <h2>회원가입</h2>
         <p>이름과 비밀번호를 입력하세요.</p>
         <div class="form-group">
             {{ form.username.label_tag }} {{ form.username }}
-        </div>
-        <div class="form-group">
             {{ form.password1.label_tag }} {{ form.password1 }}
-        </div>
-        <div class="form-group">
             {{ form.password2.label_tag }} {{ form.password2 }}
         </div>
         <div>
@@ -22,6 +19,7 @@
         </div>
     </div>
 </form>
+{% endblock %} {% block javascript %}
 <script>
         (function (){
             var elem = document.querySelectorAll('input');
@@ -29,5 +27,22 @@
                 elem[i].classList.add('form-control');
             }
         })();
+        
+        $("#id_username").change(function () {
+         var username = $(this).val();
+ 
+        $.ajax({
+            url: '{% url "validate_username" %}',
+            data: {
+                'username': username
+            },
+             dataType: 'json',
+             success: function (data) {
+                if (data.is_taken) {
+                    alert(data.error_message);
+                }
+            }
+        });
+    });
 </script>
 {% endblock %}
