@@ -23,7 +23,7 @@ def post_new(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             upload = Upload()
-            upload.pic = form.cleaned_data['pic']
+            upload.pic = form.cleaned_data['docfile']
             upload.save()
             post = form.save(commit=False)
             post.author = request.user
