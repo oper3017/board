@@ -7,7 +7,6 @@ class PostForm(forms.ModelForm):
         label='Select a file',
         help_text='max. 42 megabytes'
     )
-
     class Meta:
         model = Post
         fields = ('title', 'text',)

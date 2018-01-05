@@ -10,6 +10,7 @@
     </form>
     {% for img in images %}
         {{forloop.counter}}.<a href="{{ img.pic.url }}">{{ img.pic.name }}</a>
+        <img src="{{ img.pic.url }}" alt="{{ img.pic.name }}">
         ({{img.upload_date}})<hr />
     {% endfor %}
 </div>
