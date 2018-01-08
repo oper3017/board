@@ -11,10 +11,12 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
+    
+
 
     def publish(self):
         self.published_date = timezone.now()
-        self.save()
+        self.save() 
 
     def __str__(self):
         return self.title
@@ -23,10 +25,6 @@ class Post(models.Model):
         return self.comments.filter(approved_comment=True)
 
 class Upload(models.Model):
+    post = models.ForeignKey(Post)
     pic = models.FileField(upload_to="images/")    
     upload_date=models.DateTimeField(auto_now_add =True)
-
-class UploadForm(ModelForm):
-    class Meta:
-        model = Upload
-        fields = ('pic',)

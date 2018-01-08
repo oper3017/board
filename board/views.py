@@ -7,7 +7,7 @@ from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from .models import UploadForm,Upload
+from .models import Upload
 
 def post_list(request):
     posts = Post.objects.all()
@@ -22,13 +22,14 @@ def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            upload = Upload()
-            upload.pic = form.cleaned_data['docfile']
-            upload.save()
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
+            upload = Upload()
+            upload.pic = form.cleaned_data['docfile']
+            upload.post = post
+            upload.save()
             return redirect('board:post_detail', pk=post.pk)
     else:
         form = PostForm()
@@ -80,15 +81,3 @@ def search(request):
         return render(request, 'board/post_list.html', {'posts': results, 'form':form})
     else:
         return HttpResponse('검색어를 입력 해 주세요.')
-
-def image(request):
-    if request.method=="POST":
-        img = UploadForm(request.POST, request.FILES)       
-        if img.is_valid():
-            img.save()
-            images=Upload.objects.all()
-            return render(request,'board/image.html',{'form':img,'images':images})
-    else:
-        img=UploadForm()
-        images=Upload.objects.all()
-    return render(request,'board/image.html',{'form':img,'images':images})

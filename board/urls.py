@@ -10,5 +10,4 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^post/(?P<pk>\d+)/remove/$', views.post_remove, name='post_remove'),
     url(r'^search/$', views.search, name='search'),
-    url(r'^upload/$', views.image, name='imageupload'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
