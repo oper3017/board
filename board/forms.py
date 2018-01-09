@@ -5,7 +5,8 @@ from .models import Post
 class PostForm(forms.ModelForm):
     docfile = forms.FileField(
         label='Select a file',
-        help_text='max. 42 megabytes'
+        help_text='max. 42 megabytes',
+        required=False
     )
     class Meta:
         model = Post
@@ -20,9 +21,3 @@ CHOICES= [
 class BoardSearchForm(forms.Form):
     search_word = forms.CharField(label='검색')
     search_filter= forms.CharField(widget=forms.Select(choices=CHOICES))
-
-class DocumentForm(forms.Form):
-    docfile = forms.FileField(
-        label='Select a file',
-        help_text='max. 42 megabytes'
-    )
