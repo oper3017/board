@@ -11,6 +11,11 @@
 <div class="panel panel-default">
     <div class="panel-heading">{{post.title}}</div>
     <div class="panel-body">{{post.text|linebreaksbr}}</div>
-    <div class="panel-body"><img src="{{ Upload.pic.url }}" alt="{{ Upload.pic.name }}"></div>
+    
+    {% for files in upload %}
+        {% if files.pic %}
+        <div class="panel-body" style="border-top:1px solid #dddddd">{{forloop.counter}}.<a href="{{ files.pic.url }}">{{ files.pic.name }}</a></div>
+        {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}
