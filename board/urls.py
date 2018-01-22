@@ -10,4 +10,7 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^post/(?P<pk>\d+)/remove/$', views.post_remove, name='post_remove'),
     url(r'^search/$', views.search, name='search'),
+    url(r'^post/(?P<pk>\d+)/shoplist/$', views.shopListAdd, name='test_message'),
+    url(r'^showlist/$', views.shopListShow, name='show_list'),
+    url(r'^script/$', views.scriptShow, name='script'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

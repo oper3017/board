@@ -1,0 +1,15 @@
+{% extends 'board/base_board.html' %}
+
+{% block content %}
+    <table class="table table-bordered table-hover">
+    {% for item in post %}
+        <tr>
+        {% if item.name %}
+        <td>{{item.name}}</td>
+        {% else %}
+        <td>failed</td>
+        {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

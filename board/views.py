@@ -1,13 +1,12 @@
 from django.shortcuts import render,get_object_or_404,redirect, HttpResponse
 from django.utils import timezone
-from .models import Post
+from .models import Post, Upload, Shoplist
 from django.contrib.auth.models import User
 from .forms import PostForm, BoardSearchForm
 from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from .models import Upload
 
 def post_list(request):
     posts = Post.objects.all()
@@ -83,3 +82,19 @@ def search(request):
         return render(request, 'board/post_list.html', {'posts': results, 'form':form})
     else:
         return HttpResponse('검색어를 입력 해 주세요.')
+
+def shopListAdd(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    newlist = Shoplist()
+    newlist.user = request.user
+    newlist.name = post.title
+    newlist.save()
+    return render(request, 'board/test_message.html', {'post': newlist,})
+
+def shopListShow(request):
+    allshow = Shoplist.objects.all()
+    results = allshow.filter(user_id=request.user)
+    return render(request, 'board/shop_list.html', {'post': results})
+    
+def scriptShow(request):
+    return render(request, 'board/jscript.html')

@@ -6,6 +6,7 @@
     <a href="{% url 'board:post_edit' pk=post.pk %}" class="btn btn-primary">수정</a>
     <a href="{% url 'board:index' %}" class="btn btn-primary">목록</a>
     <a href="{% url 'board:post_remove' pk=post.pk %}" class="btn btn-primary">삭제</a>
+    <a href="{% url 'board:test_message' pk=post.pk %}" class="btn btn-primary">장바구니 추가</a>
 </div>
 {% endif %}
 <div class="panel panel-default">

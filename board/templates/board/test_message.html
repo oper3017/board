@@ -1,0 +1,11 @@
+{% extends 'board/base_board.html' %}
+
+{% block content %}
+<script>
+    (function (){
+        alert("{{post.user}}님의 장바구니에 항목이 추가되었습니다.");
+        window.location.href = 'http://127.0.0.1:8000/board/';
+    })();
+</script>
+
+{% endblock %}

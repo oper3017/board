@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block extra_style %}{% static "css/home.css" %}{% endblock %}
+{% block content %}
+<canvas id = "mycanvas" width = "480" height = "320" style = "background: #eee;" }></canvas>
+<br>
+<button id = "start" class="btn btn-default" onclick="startGame()">START!</button>
+<script>
+    var canvas = document.getElementById("mycanvas");
+    var ctx = canvas.getContext("2d");
+    var ballRadius = 10;
+    var x = Math.floor(Math.random() * 320) + 80;
+    var y = canvas.height-60;
+    var dx = 2;
+    var dy = -2;
+    var playerWidth = 75;
+    var playerHeight = 10;
+    var px = canvas.width/2-40;
+    var py = canvas.height-40;
+    var i,j;
+    var col = 5;
+    var row = 4;
+    var block = [];
+    var keycode = 0;
+    var playerSpeedX = 0;
+    var remain = 0;
+    var score = 0;
+    var trigger = false;
+
+    for(i = 0; i < col; i++) {
+        block[i] = [];
+        for(j = 0; j < row; j++) {
+            block[i][j] = { x: 0, y: 0, status: 1 };
+        }
+    }
+    function startGame() {
+        dx = 2;
+        dy = -2;
+        x = Math.floor(Math.random() * 320) + 80;
+        y = canvas.height-60;
+        for(i = 0; i < col; i++) {
+            for(j = 0; j < row; j++) {
+                var b = block[i][j];
+                b.status = 1;
+            }
+        }
+        px = canvas.width/2-40;
+        py = canvas.height-40;
+        trigger = true;
+        remain = 0;
+    }
+
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#FF0000";
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    function drawBlock() {
+        for(i = 0; i < col; i++) {
+            for(j = 0; j < row; j++) {
+                if(block[i][j].status == 1) {
+                    var blockX = (i * (75+10))+30;
+                    var blockY = (j * (20+10))+30;
+                    block[i][j].x = blockX;
+                    block[i][j].y = blockY;
+                    ctx.beginPath();
+                    ctx.rect(blockX, blockY, 75, 20);
+                    ctx.fillStyle = "#0095DD";
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+        }
+    }
+
+    function drawPlayer() {
+        ctx.beginPath();
+        ctx.rect(px, py, playerWidth, playerHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+        if(x > px && x < px+75 && y > py && y < py+20) {
+            dy = -dy;
+            score += 100;
+        }
+
+    }
+
+    function collision() {
+        for(i = 0; i < col; i++) {
+            for(j = 0; j < row; j++) {
+                var b = block[i][j];
+                if(b.status == 1) {
+                    if(x > b.x && x < b.x+75 && y > b.y && y < b.y+25) {
+                        dy = -dy;
+                        b.status = 0;
+                        remain = remain + 100;
+                    }
+                }
+            }
+        }
+    }
+
+    function draw() {
+        if (trigger == true){
+            if (y != canvas.height-ballRadius && remain < 2000){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawBall();
+                drawBlock();
+                drawPlayer();
+                collision();
+                window.addEventListener('keydown', function (e) {
+                    keycode = e.keyCode;
+                })
+                window.addEventListener('keyup', function (e) {
+                    keycode = 0;
+                })
+                playerSpeedX = 0;
+                if (keycode == 37) {playerSpeedX = -4; }
+                if (keycode == 39) {playerSpeedX = 4; }
+                if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+                    dx = -dx;
+                }
+                if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+                    dy = -dy;
+                }
+                px += playerSpeedX;
+                x += dx;
+                y += dy;
+            }
+            else if (remain == 2000) {
+                ctx.font = "30px Arial";
+                ctx.fillStyle = "#0000FF"
+                ctx.fillText("GAME CLEAR!",150,180);
+                ctx.fillText("YOUR SCORE : " + score,110,210);
+            }
+            else {
+                ctx.font = "30px Arial";
+                ctx.fillStyle = "#FF0000"
+                ctx.fillText("GAME OVER",150,180);
+            }
+        }
+    }
+        setInterval(draw, 10);
+</script>
+
+
+{% endblock %}

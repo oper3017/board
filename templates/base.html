@@ -17,7 +17,7 @@
     <div class="container">
         <nav class="nav">
             <div class="container-fluid">
-                <div class="navbar-header"><a class="navbar-brand" href="{% url 'home' %}">TEST HOMEPAGE</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="{% url 'home' %}">PORTPOLIO HOMEPAGE</a></div>
                     <ul class="nav navbar-nav">
                         {% if user.is_active %}
                         <li><a href="">{% firstof user.get_short_name user.get_username %}님 입장.</a></li>
@@ -45,7 +45,7 @@
                             <a href="{% url 'board:index' %}">게시판</a>
                         </li>
                         <li>
-                            <a href="{% url 'board:index' %}">갤러리</a>
+                            <a href="{% url 'board:script' %}">미니게임</a>
                         </li>
                     </ul>
             </div>
@@ -55,8 +55,6 @@
         <br><br>
         {% block footer %}
         <div>&copy; 2017. (이름) All rights reserved.</div>{% endblock %}
-        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-            <script src="{% static 'js/app.js' %}"></script>
             {% block javascript %}{% endblock %}
     </div>
 </body>

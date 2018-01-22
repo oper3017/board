@@ -6,12 +6,10 @@
     <h1>게시판</h1>
     {% block content_board %}{% endblock content_board %}
     <div><a href="{% url 'board:post_new'%}" class="btn btn-info" role="button">쓰기</a>
-        <a href="{% url 'board:index'%}" class="btn btn-info" role="button">목록</a></div>
+         <a href="{% url 'board:index'%}" class="btn btn-info" role="button">목록</a>
+         <a href="{% url 'board:show_list' %}" class="btn btn-info" role="button">장바구니</a>
+    </div>
     
-{% else %} 
-    <h2>로그인이 필요한 서비스입니다.</h2>
-    <a href="{% url 'login' %}">로그인</a>
-{% endif %}
     <br>
     <form method="GET" class="post-form" action="{% url 'board:search' %}">
         <div class="form-group">
@@ -20,4 +18,8 @@
             <button type="submit" class="btn btn-default">검색</button>
         </div>
     </form>
+    {% else %} 
+    <h2>로그인이 필요한 서비스입니다.</h2>
+    <a href="{% url 'login' %}">로그인</a>
+    {% endif %}
 {% endblock %}
