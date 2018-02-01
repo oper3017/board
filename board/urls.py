@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/shoplist/$', views.shopListAdd, name='test_message'),
     url(r'^showlist/$', views.shopListShow, name='show_list'),
     url(r'^script/$', views.scriptShow, name='script'),
+    url(r'^resume/$', views.resumeShow, name='resume'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

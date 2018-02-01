@@ -32,4 +32,3 @@ class Upload(models.Model):
 class Shoplist(models.Model):
     user = models.ForeignKey('auth.User')
     name = models.TextField()
-    

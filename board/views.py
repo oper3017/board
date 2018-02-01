@@ -98,3 +98,6 @@ def shopListShow(request):
     
 def scriptShow(request):
     return render(request, 'board/jscript.html')
+
+def resumeShow(request):
+    return render(request, 'board/resume.html')
